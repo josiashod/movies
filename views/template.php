@@ -48,7 +48,7 @@
                 $erreur="";
         }
     }
-    //TARIF
+    //Ajouter TARIF
     if(isset($_POST['rate'])){ 
         $name = htmlspecialchars($_POST['name']);
         $price = htmlspecialchars($_POST['price']);
@@ -58,7 +58,7 @@
         header("Location: $_SERVER[HTTP_REFERER]");  
     }
 
-    //SALLE
+    //Ajouter SALLE
     if(isset($_POST['room'])){ 
         $name = htmlspecialchars($_POST['name']);
         $place = htmlspecialchars($_POST['place']);
@@ -68,6 +68,7 @@
         header("Location: $_SERVER[HTTP_REFERER]");  
     }
 
+    //Filtre de la barre de recherche
     if(isset($_POST['filter'])) {
         $filter = htmlspecialchars($_POST['filter']);
         $search = htmlspecialchars($_POST['search']);

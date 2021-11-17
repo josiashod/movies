@@ -1,12 +1,13 @@
 <?php
 session_start();
 require '../../database/db.php';
-    //all
+    //Films trouvés
     $found = $bdd->query('SELECT COUNT(*) FROM movies')->fetchColumn();
     $movies = $bdd->query('SELECT* FROM movies ORDER BY id DESC');
-    //count
+    //Nombre total de films
     $all = $bdd->query('SELECT COUNT(*) FROM movies')->fetchColumn();
-    //filter
+
+    //Traitement des données pour le filtre
     if(isset($_GET['filter']) || isset($_GET['search'])) {
         $filter = htmlspecialchars($_GET['filter']);
         $search = htmlspecialchars($_GET['search']);
@@ -15,6 +16,7 @@ require '../../database/db.php';
         $movies = $bdd->query('SELECT * FROM movies WHERE CONCAT(name) LIKE "%'.$search.'%" AND kind="'.$filter.'"  ORDER BY id DESC');
         $found = $bdd->query('SELECT COUNT(*) FROM movies WHERE CONCAT(name) LIKE "%'.$search.'%" AND kind="'.$filter.'" ORDER BY id DESC')->fetchColumn();
     }
+    $exist = $movies->rowCount();
     
 ?>
 <?php $title = 'Accueil'; ?>
@@ -137,28 +139,31 @@ require '../../database/db.php';
                                 <button type="submit" class="list" ><i class="ion-ios-search "></i></button>
                         </div>
                     </form>
-                    <div class="flex-wrap-movielist mv-grid-fw">
-                        <?php while($movie = $movies->fetch()) { ?>
-                            <div class="movie-item-style-2 movie-item-style-1">
-                                <img src="image/<?=$movie['image'];?>" alt="" style="width:200px;height:250px">
-                                <div class="hvr-inner">
-                                    <a href="detail.php?id=<?=$movie['id'];?>">Voir plus <i class="ion-android-arrow-dropright"></i> </a>
-                                </div>
-                                <div class="mv-item-infor">
-                                    <div class="cate" style="font-size:0.7em">
-                                        <span class="orange"><a href="#"><?=$movie['kind'];?></a></span>
-                                        <?php if($movie['new']) { ?>
-                                            <span class="blue"><a href="#">NEW</a></span>
-                                        <?php } ?>
+                    <?php if($exist != 0) { ?>
+                        <div class="flex-wrap-movielist mv-grid-fw">
+                            <?php while($movie = $movies->fetch()) { ?>
+                                <div class="movie-item-style-2 movie-item-style-1">
+                                    <img src="image/<?=$movie['image'];?>" alt="" style="width:200px;height:250px">
+                                    <div class="hvr-inner">
+                                        <a href="detail.php?id=<?=$movie['id'];?>">Voir plus <i class="ion-android-arrow-dropright"></i> </a>
                                     </div>
-                                    <h6><a href="#"><?=$movie['name'];?></a></h6>
+                                    <div class="mv-item-infor">
+                                        <div class="cate" style="font-size:0.7em">
+                                            <span class="orange"><a href="#"><?=$movie['kind'];?></a></span>
+                                            <?php if($movie['new']) { ?>
+                                                <span class="blue"><a href="#">NEW</a></span>
+                                            <?php } ?>
+                                        </div>
+                                        <h6><a href="#"><?=$movie['name'];?></a></h6>
+                                    </div>
                                 </div>
-                            </div>
-						<?php }?>				
-                            
-                            
-                    </div>		
-                    
+                            <?php }?>				
+                                
+                                
+                        </div>		
+                    <?php } else{ ?>
+					    <h2	style="color: white; text-align:center">Aucun film trouvé</h2>
+				    <?php } ?>	
                 </div>
             </div>
         </div>

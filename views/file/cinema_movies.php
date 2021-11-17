@@ -18,9 +18,15 @@
         $movie = htmlspecialchars($_POST['movie']);
 		$week = date('Y-m-W',strtotime($_POST['date']));
 
-        $insertmbr = $bdd->prepare("INSERT INTO program(movie, date, time, room, rate,week) VALUES(?, ?, ?, ?, ?,?)");
-        $insertmbr->execute(array($movie,$date,$time,$room,$rate,$week));
-		header('Location: after.php'); 
+		$req= $bdd->prepare("SELECT* FROM movies WHERE date=? AND time=? AND room=?");
+        $req->execute(array($date,$time,$room));
+        $exist = $req->rowCount();
+		if($exist == 0){
+			$insertmbr = $bdd->prepare("INSERT INTO program(movie, date, time, room, rate,week) VALUES(?, ?, ?, ?, ?,?)");
+			$insertmbr->execute(array($movie,$date,$time,$room,$rate,$week));
+			header('Location: after.php'); 
+		}else
+			$erreur="Ce film est déjà programmer au même horaire";
     }
 
 ?>

@@ -2,6 +2,7 @@
     session_start();
     require '../../database/db.php';
     $events = $bdd->query('SELECT* FROM events ORDER BY id DESC');
+	$exist = $events->rowCount();
 
 ?>
 
@@ -24,6 +25,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
+			<?php if($exist != 0) { ?>
 				<div class="row">
                     <?php while($event = $events->fetch()) { ?>
                         <div class="col-md-4 col-sm-12 col-xs-12">
@@ -38,6 +40,9 @@
                         </div>
                     <?php } ?>
 				</div>
+			<?php } else{ ?>
+				<h2	style="color: white; text-align:center">Aucun Evènement</h2>
+			<?php } ?>	
 			</div>
 		
 		</div>
