@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2021 at 04:38 PM
+-- Generation Time: Nov 22, 2021 at 12:15 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `cinema`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `event_id`, `name`, `message`, `date`) VALUES
+(1, 1, 'Samuel AHOUANVOEKE', 'sdsfsdfdsEven though Journey\'s classic vocalist Steve Perry didn’t reunite with the band during their Rock Hall performance (to the dismay of hopeful fans), he did offer up a touching speech.', '2021-11-21 20:40:30'),
+(2, 1, 'Dave McNary', 'Prince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.', '2021-11-21 20:59:24');
 
 -- --------------------------------------------------------
 
@@ -62,7 +84,7 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `title`, `date`, `type`, `content`, `image`) VALUES
-(1, 'New Character Posters For Pirates Of The Caribbean', '2021-11-13', 'avant-premieres', ' Joss Whedon has a little bit of a history with superhero movies, and for creating layered female characters. After his documented frustrations with Wonder Woman, he\'s getting another chance at the DC Extended Universe and Warner Bros., closing in on a deal to write direct and produce a Batgirl movie.\r\n\r\nIt\'s a somewhat surprising, but welcome move, given that Whedon has taken a long break to write something original, but has now pivoted to focus on developing the Batgirl project. First appearing in 1967 in Gardner Fox and Carmine Infantino\'s story run The Million Dollar Debut Of Batgirl, she\'s the superhero alias of Barbara Gordon, daughter of Gotham City Police Commissioner James Gordon. So we can likely expect J.K. Simmons\' take on Gordon to appear along with other Bat-related characters.\r\n\r\nBased on Lissa Evans’ novel “Their Finest Hour and a Half” and directed by Lone Scherfig (“An Education”), the film is set in London during World War II when the British ministry was utilizing propaganda films to boost morale. Arterton plays Catrin Cole, a scriptwriter who is brought on to handle the women’s dialogue — commonly referred to as “the nausea.” The film, opening this week, features an outstanding ensemble, including Bill Nighy as a washed-up actor and Sam Claflin as Catrin’s fellow writer and sparring partner.\r\n\r\nArterton is next set to play Vita Sackville-West in Vita and Virginia about her relationship with Virginia Woolf. She spoke to Variety about working with female directors, remarkable women, and why she shies away from the term “strong female character.”\r\nI’m friends with the producer who I worked with on Byzantium and he sent it to me. I read the book as well, which is fantastic. You’re always looking for untold stories and many times they’re women’s stories. What surprised me is that it centers around a woman who’s really quite timid. I guess she’s allowed to be because all of the other characters. ', 'blog-detail.jpg');
+(1, 'New Character Posters For Pirates Of The Caribbean', '2021-11-13', 'euro', ' Joss Whedon has a little bit of a history with superhero movies, and for creating layered female characters. After his documented frustrations with Wonder Woman, he\'s getting another chance at the DC Extended Universe and Warner Bros., closing in on a deal to write direct and produce a Batgirl movie.\r\n\r\nIt\'s a somewhat surprising, but welcome move, given that Whedon has taken a long break to write something original, but has now pivoted to focus on developing the Batgirl project. First appearing in 1967 in Gardner Fox and Carmine Infantino\'s story run The Million Dollar Debut Of Batgirl, she\'s the superhero alias of Barbara Gordon, daughter of Gotham City Police Commissioner James Gordon. So we can likely expect J.K. Simmons\' take on Gordon to appear along with other Bat-related characters.\r\n\r\nBased on Lissa Evans’ novel “Their Finest Hour and a Half” and directed by Lone Scherfig (“An Education”), the film is set in London during World War II when the British ministry was utilizing propaganda films to boost morale. Arterton plays Catrin Cole, a scriptwriter who is brought on to handle the women’s dialogue — commonly referred to as “the nausea.” The film, opening this week, features an outstanding ensemble, including Bill Nighy as a washed-up actor and Sam Claflin as Catrin’s fellow writer and sparring partner.\r\n\r\nArterton is next set to play Vita Sackville-West in Vita and Virginia about her relationship with Virginia Woolf. She spoke to Variety about working with female directors, remarkable women, and why she shies away from the term “strong female character.”\r\nI’m friends with the producer who I worked with on Byzantium and he sent it to me. I read the book as well, which is fantastic. You’re always looking for untold stories and many times they’re women’s stories. What surprised me is that it centers around a woman who’s really quite timid. I guess she’s allowed to be because all of the other characters. ', 'blog-detail.jpg');
 
 -- --------------------------------------------------------
 
@@ -109,7 +131,36 @@ INSERT INTO `images` (`id`, `link`, `type_id`, `type`) VALUES
 (25, 'blogv22.jpg', 2, 'image'),
 (26, 'blogv23.jpg', 2, 'image'),
 (27, 'blogv24.jpg', 2, 'image'),
-(28, 'blogv25.jpg', 2, 'image');
+(28, 'blogv25.jpg', 2, 'image'),
+(29, 'bloglist-it1.jpg', 3, 'image'),
+(30, 'bloglist-it2.jpg', 3, 'image'),
+(31, 'bloglist-it3.jpg', 3, 'image'),
+(32, 'bloglist-it4.jpg', 3, 'image'),
+(33, 'bloglist-it5.jpg', 3, 'image'),
+(34, 'bloglist-it6.jpg', 3, 'image'),
+(35, 'blogv21.jpg', 3, 'image'),
+(36, 'blog29.jpg', 3, 'image'),
+(37, 'blog-detail.jpg', 3, 'image'),
+(38, 'blog-detail2.jpg', 3, 'image'),
+(39, 'blog-it1.jpg', 3, 'image'),
+(40, 'blog-it2.jpg', 3, 'image'),
+(41, 'bloglist-it1.jpg', 3, 'image'),
+(42, 'bloglist-it2.jpg', 3, 'image'),
+(43, 'bloglist-it3.jpg', 3, 'image'),
+(44, 'bloglist-it4.jpg', 3, 'image'),
+(45, 'bloglist-it5.jpg', 3, 'image'),
+(46, 'bloglist-it6.jpg', 3, 'image'),
+(47, 'blogv21.jpg', 3, 'image'),
+(48, 'bloglist-it4.jpg', 4, 'image'),
+(49, 'bloglist-it5.jpg', 4, 'image'),
+(50, 'bloglist-it6.jpg', 4, 'image'),
+(51, 'blogv21.jpg', 4, 'image'),
+(52, 'blogv22.jpg', 4, 'image'),
+(53, 'blogv23.jpg', 4, 'image'),
+(54, 'blogv24.jpg', 4, 'image'),
+(55, 'blogv25.jpg', 4, 'image'),
+(56, 'blogv29.jpg', 4, 'image'),
+(57, 'cast1.jpg', 4, 'image');
 
 -- --------------------------------------------------------
 
@@ -133,8 +184,34 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`id`, `kind`, `name`, `date`, `time`, `new`, `resume`, `image`) VALUES
-(1, 'divertissement', 'SPATARI', '2021-11-11', '01:30:00', 1, 'Tony Stark creates the Ultron Program to protect the world, but when the peacekeeping program becomes hostile, The Avengers go into action to try and defeat a virtually impossible enemy together. Earth\'s mightiest heroes must come together once again to protect the world from global extinction.', 'movie-single.jpg'),
-(2, 'action', 'Aang AVATAR', '2021-11-17', '02:30:00', 0, 'Prince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.\r\nPrince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.\r\nPrince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.\r\nPrince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.\r\nPrince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.', 'film1.jpg');
+(1, 'divertissement', 'SPATARI', '2021-11-11', '01:30:00', 0, 'Tony Stark creates the Ultron Program to protect the world, but when the peacekeeping program becomes hostile, The Avengers go into action to try and defeat a virtually impossible enemy together. Earth\'s mightiest heroes must come together once again to protect the world from global extinction.', 'movie-single.jpg'),
+(2, 'action', 'Aang AVATAR', '2021-11-17', '02:30:00', 0, 'Prince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.\r\nPrince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.\r\nPrince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.\r\nPrince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.\r\nPrince died not long after the 2016 Rock Hall ceremony, so this year\'s edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.', 'film1.jpg'),
+(3, 'policier', 'Salle PABLO', '2021-11-11', '02:30:00', 0, 'ytcvhygiumfyvhiogmiulbjihoygtfiylvhgmofiylvhkgoiulfyvhk ugilyvhjbkgilfyvhgouilfbkj:ohglifuvhoih iulgvuolvho', 'ads1.png'),
+(4, 'drame', 'KACHALO', '2021-11-21', '01:50:00', 1, 'dvfwdfbkjdvhbdshvhbjk vkdbshvhdsbjvhogbdsjvho dsnvibdsjhvgbjdshivobds vidbsjvndbsjvs', 'film6.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `opinions`
+--
+
+CREATE TABLE `opinions` (
+  `id` int(11) NOT NULL,
+  `movie_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `opinions`
+--
+
+INSERT INTO `opinions` (`id`, `movie_id`, `name`, `rating`, `content`, `date`) VALUES
+(1, 4, 'Samuel AHOUANVOEKE', 5, 'three times does not bother me here as it is as thrilling and exciting every time I am watching it. In other words, the movie is by far better than previous movies (and I do love everything Marvel), the plotting is splendid (they really do out do themselves in each film, there are no problems watching it more than once.', '2021-11-22 11:36:26'),
+(2, 4, 'John Pilm', 3, 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo eaque porro alias assumenda accusamus incidunt odio molestiae maxime quo atque in et quaerat, vel unde aliquam aperiam quidem consectetur omnis dicta officiis? Dolorum, error dolorem! ', '2021-11-22 11:46:10'),
+(3, 4, 'Salla PABLO', 0, 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo eaque porro alias assumenda accusamus incidunt odio molestiae maxime quo atque in et quaerat, vel unde aliquam aperiam quidem consectetur omnis dicta officiis? Dolorum, error dolorem! ', '2021-11-22 11:49:11');
 
 -- --------------------------------------------------------
 
@@ -157,7 +234,7 @@ CREATE TABLE `program` (
 --
 
 INSERT INTO `program` (`id`, `date`, `week`, `time`, `rate`, `movie`, `room`) VALUES
-(1, '2021-11-07', '2021-11-44', '15:30:00', 'Tarif Standart - 1500', 1, 'Salle Aang - 200'),
+(1, '2021-11-25', '2021-11-47', '15:30:00', 'Avant Premiere - 5000', 1, 'Salle Aang - 200'),
 (2, '2021-11-11', '2021-11-45', '02:10:00', 'Tarif standard - 1500', 2, '1 - 200');
 
 -- --------------------------------------------------------
@@ -169,21 +246,22 @@ INSERT INTO `program` (`id`, `date`, `week`, `time`, `rate`, `movie`, `room`) VA
 CREATE TABLE `rates` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `price` int(11) NOT NULL
+  `price` int(11) NOT NULL,
+  `del` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `rates`
 --
 
-INSERT INTO `rates` (`id`, `name`, `price`) VALUES
-(1, 'Tarif standard', 1500),
-(2, 'Aang AVATAR', 0),
-(3, '', 0),
-(4, '', 0),
-(5, '', 0),
-(6, '', 0),
-(7, '', 0);
+INSERT INTO `rates` (`id`, `name`, `price`, `del`) VALUES
+(1, 'Tarif standard', 1500, 0),
+(2, 'Avant-premiere', 5000, 0),
+(3, '', 0, 1),
+(4, '', 0, 1),
+(5, '', 0, 1),
+(6, '', 0, 1),
+(7, '', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -194,20 +272,21 @@ INSERT INTO `rates` (`id`, `name`, `price`) VALUES
 CREATE TABLE `rooms` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `place` int(11) NOT NULL
+  `place` int(11) NOT NULL,
+  `del` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`id`, `name`, `place`) VALUES
-(1, 'Aang AVATAR', 200),
-(2, '', 0),
-(3, '', 0),
-(4, '', 0),
-(5, '', 0),
-(6, '', 0);
+INSERT INTO `rooms` (`id`, `name`, `place`, `del`) VALUES
+(1, 'Salle P200', 200, 0),
+(2, '', 0, 1),
+(3, '', 0, 1),
+(4, '', 0, 1),
+(5, '', 0, 1),
+(6, '', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -236,6 +315,12 @@ INSERT INTO `user` (`id`, `username`, `email`, `password`, `statut`) VALUES
 --
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `contacts`
 --
 ALTER TABLE `contacts`
@@ -257,6 +342,12 @@ ALTER TABLE `images`
 -- Indexes for table `movies`
 --
 ALTER TABLE `movies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `opinions`
+--
+ALTER TABLE `opinions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -288,6 +379,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
@@ -303,13 +400,19 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `opinions`
+--
+ALTER TABLE `opinions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `program`
