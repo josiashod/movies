@@ -22,7 +22,10 @@ if(isset($_POST['movies'])){
 				basename($_FILES['image']['name']));
 				$image=$_FILES['image']['name'];
 		  }
-	}
+	}else{
+		$erreur_taille1 = "Image principale trop lourd. Taille max:";
+		echo $erreur_taille1;}
+
 	$insertmovies = $bdd->prepare("INSERT INTO movies(name, kind, new, date, time, resume, image) VALUES(?, ?, ?, ?, ?, ?, ?)");
 	$insertmovies->execute(array($name,$kind,$new,$date,$time,$resume,$image));
 
@@ -76,6 +79,17 @@ if(isset($_POST['movies'])){
 				<div class="form-style-1 user-pro" action="#">
 					<form action="" class="user" method="post" enctype="multipart/form-data">
 						<h4>Informations sur le film</h4>
+						<?php if(isset($erreur_email)){?>
+							<div style="border: 1px solid transparant; background:rgba(255, 34, 34, 0.308); font-size: 1.2em; color: red;padding: 1%;text-align: center;  ">
+							<?=$erreur_taille;?>
+						</div>
+						<?php }?>
+
+						<?php if(isset($erreur_email)){?>
+							<div style="border: 1px solid transparant; background:rgba(255, 34, 34, 0.308); font-size: 1.2em; color: red;padding: 1%;text-align: center;  ">
+							<?=$erreur_taille1;?>
+						</div>
+						<?php }?>
 						<div class="row">
 							<div class="col-md-4 form-it">
 								<label>Nom du film</label>

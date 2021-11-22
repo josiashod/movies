@@ -23,14 +23,14 @@ if(isset($_SESSION['id'])){
 			</div>
 		</div><br>
         <div class="row">
-			<a class="col-md-3 sub rateLink" href="#">
+			<a class="col-md-3 sub" href="rate.php">
 				<div class="">
-					<h3>Ajouter un tarif</h3>
+					<h3>Tarif</h3>
 				</div>
             </a>
-            <a class="col-md-3 sub roomLink" href="#">
+            <a class="col-md-3 sub" href="room.php">
 				<div class="">
-					<h3>Ajouter une salle</h3>
+					<h3>Salle</h3>
 				</div>
             </a>
             <a class="col-md-3 sub" href="add_movies.php">

@@ -1,7 +1,0 @@
-RewriteEngine On
-
-# Resolve .php file for extensionless php urls
-# RewriteRule ^([^/.]+)$ $1.php [NC,L]
-RewriteCond %{RESQUET_FILENAME} !-f
-RewriteCond %{RESQUET_FILENAME} !-d
-RewriteRule ^(.*)$ home.php?url=$1 [NC,L]

@@ -444,13 +444,17 @@ $(function(){
 	//==js for login and sign up
 	var loginLink = $(".loginLink");
 	var signupLink = $(".signupLink");
+	var ratesLink = $(".ratesLink");
+	var roomsLink = $(".roomsLink");
 	var rateLink = $(".rateLink");
 	var roomLink = $(".roomLink");
 	var loginct = $( "#login-content" );
 	var signupct= $("#signup-content");
+	var loginWrap = $(".login-wrapper");
 	var rate= $("#rate-content");
 	var room= $("#room-content");
-	var loginWrap = $(".login-wrapper");
+	var rateup= $("#rate-contentup");
+	var roomup= $("#room-contentup");
 	var overlay = $(".overlay");
 	loginWrap.each( function(){
 		$(this).wrap('<div class="overlay"></div>')
@@ -519,6 +523,38 @@ $(function(){
 			}	
 		});
     });
+	//pop up for rateup form
+    ratesLink.on('click', function(event){
+    	event.preventDefault();
+    	rateup.parents(overlay).addClass("openform");
+		$(document).on('click', function(e){
+		var target = $(e.target);
+		if ($(target).hasClass("overlay")){
+				$(target).find(rateup).each( function(){
+					$(this).removeClass("openform");
+				});
+				setTimeout( function(){
+					$(target).removeClass("openform");
+				}, 350);
+			}	
+		});
+    });
+	//pop up for room form
+    roomsLink.on('click', function(event){
+    	event.preventDefault();
+    	roomup.parents(overlay).addClass("openform");
+		$(document).on('click', function(e){
+		var target = $(e.target);
+		if ($(target).hasClass("overlay")){
+				$(target).find(roomup).each( function(){
+					$(this).removeClass("openform");
+				});
+				setTimeout( function(){
+					$(target).removeClass("openform");
+				}, 350);
+			}	
+		});
+    });
     // close popup for mobile
     var closebt = $(".close");
    	closebt.on('click', function(e){
@@ -560,6 +596,48 @@ $(function(){
         $('html,body').animate({
             scrollTop: $(document).height()-$(window).height()
         }, 700);
+    });
+
+	/*==================================================================
+    [ Rating ]*/
+    $('.wrap-rating').each(function(){
+        var item = $(this).find('.item-rating');
+        var rated = -1;
+        var input = $(this).find('input');
+        $(input).val(0);
+
+        $(item).on('mouseenter', function(){
+            var index = item.index(this);
+            var i = 0;
+            for(i=0; i<=index; i++) {
+                $(item[i]).removeClass('fa-star-o');
+                $(item[i]).addClass('fa-star');
+            }
+
+            for(var j=i; j<item.length; j++) {
+                $(item[j]).addClass('fa-star-o');
+                $(item[j]).removeClass('fa-star');
+            }
+        });
+
+        $(item).on('click', function(){
+            var index = item.index(this);
+            rated = index;
+            $(input).val(index+1);
+        });
+
+        $(this).on('mouseleave', function(){
+            var i = 0;
+            for(i=0; i<=rated; i++) {
+                $(item[i]).removeClass('fa-star-o');
+                $(item[i]).addClass('fa-star');
+            }
+
+            for(var j=i; j<item.length; j++) {
+                $(item[j]).addClass('fa-star-o');
+                $(item[j]).removeClass('fa-star');
+            }
+        });
     });
 
 	//sticky sidebar

@@ -10,6 +10,21 @@
         $programs = $bdd->query('SELECT* FROM program WHERE movie = "'.$movie['id'].'"');
 
         $nbr = $bdd->query('SELECT Count(*) FROM images WHERE type_id = "'.$movie['id'].'" AND type="image"')->fetchColumn(); 
+
+		if(isset($_POST['opinion'])){ 
+			$name = htmlspecialchars($_POST['name']);
+			$rating = htmlentities($_POST['rating']);
+			$content = htmlspecialchars($_POST['content']);
+			//var_dump($rating);
+			//die();
+		
+			$insertmbr = $bdd->prepare("INSERT INTO opinions(movie_id,name, rating, content, date) VALUES(?, ?, ?, ?, NOW())");
+			$insertmbr->execute(array($_GET['id'],$name,$rating,$content));
+			header("Location: $_SERVER[HTTP_REFERER]"); 
+		}
+
+		$opinions = $bdd->query('SELECT* FROM opinions WHERE movie_id = "'.$_GET['id'].'" ORDER BY id DESC');
+		$count = $bdd->query('SELECT COUNT(*) FROM opinions WHERE movie_id = "'.$_GET['id'].'"')->fetchColumn();
     }
 
 ?>
@@ -75,7 +90,8 @@
 						<div class="tabs">
 							<ul class="tab-links tabs-mv">
 								<li class="active"><a href="#resume">Description</a></li>
-								<li><a href="#cast">  Programme Cinéma </a></li>                       
+								<li><a href="#cast">  Programme Cinéma </a></li> 
+								<li><a href="#reviews"> Avis</a></li>                      
 							</ul>
 						    <div class="tab-content">
                                 <div id="resume" class="tab active" style="margin-left:5px">
@@ -124,6 +140,68 @@
 										<!-- //== -->
 						            </div>
 					       	 	</div>
+								<div id="reviews" class="tab review">
+						           <div class="row">
+						            	<div class="rv-hd">
+						            		<div class="div">
+							            		<h3>Vos avis sur:</h3>
+						       	 				<h2><?=$movie['name'];?></h2>
+							            	</div>
+							            	<a href="#comment" class="redbtn">Write Review</a>
+						            	</div>
+										<?php while($opinion = $opinions->fetch()) { ?>
+											<div class="mv-user-review-item">
+												<div class="user-infor">
+													<img src="../../publics/images/uploads/user.png" alt="">
+													<div>
+														<h3><?=$opinion['name'];?></h3>
+														<div class="no-star">
+														<?php for($i=1 ; $i<=$opinion['rating']; $i++){ ?>
+															<i class="fa fa-star"></i>
+														<?php }?>
+														<?php for($i=1 ; $i<=(5-$opinion['rating']); $i++){ ?>
+															<i class="fa fa-star-o"></i>
+														<?php }?>
+														</div>
+														<p class="time">
+															<?=date("d M Y",strtotime($movie['date']));?>
+														</p>
+													</div>
+												</div>
+												<p><?=$opinion['content'];?></p>
+											</div>
+										<?php }?>
+						            </div>
+									<div class="blog-detail-ct">
+										<div class="comment-form">
+											<h4 id='comment'>Donner votre avis</h4>
+											<form action="" method="post">
+												<div class="row">
+													<div class="col-md-6">
+														<input type="text" name="name" placeholder="Nom complet">
+													</div>
+													<div class="col-md-6">
+													<span class="wrap-rating cl11 pointer">
+														<i class="item-rating pointer fa fa-star-o"></i>
+														<i class="item-rating pointer fa fa-star-o"></i>
+														<i class="item-rating pointer fa fa-star-o"></i>
+														<i class="item-rating pointer fa fa-star-o"></i>
+														<i class="item-rating pointer fa fa-star-o"></i>
+														<input class="dis-none" type="hidden" name="rating" required>
+													</span>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<textarea name="content" id="" placeholder="Votre avis"></textarea>
+													</div>
+												</div>
+												<input class="submit" name="opinion" type="submit" value="Envoyer">
+											</form>
+										</div>
+										<!-- comment form -->
+									</div>
+						        </div>
 						    </div>
 						</div>
 					</div>
@@ -132,6 +210,20 @@
 		</div>
 	</div>
 </div>
+<style>
+.dis-none{
+	display: none;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.cl11{
+	color: #f9ba48;
+	font-size: 25px;
+}
+</style>
 
 <?php $content = ob_get_clean(); ?>
 

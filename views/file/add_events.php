@@ -81,8 +81,6 @@ if(isset($_POST['events'])){
 								<label>Type d'évènement</label>
 								<select name="type" required>
 									<option>--- Choisir ---</option>
-									<option value="avant-premeres">Avant-premières</option>
-									<option value="soirees thematiques">Soirées thématiques</option>
 									<option value="euro">Cinéma Européens</option>
 									<option value="afri">Cinéma Africains</option>
                                 </select>

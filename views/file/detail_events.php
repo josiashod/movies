@@ -9,6 +9,18 @@ session_start();
 		$images = $bdd->query('SELECT* FROM images WHERE type_id = "'.$event['id'].'" AND type="event"');
 
 		$nbr = $bdd->query('SELECT Count(*) FROM images WHERE type_id = "'.$event['id'].'" AND type="image"')->fetchColumn(); 
+
+		if(isset($_POST['comment'])){ 
+			$name = htmlspecialchars($_POST['name']);
+			$message = htmlspecialchars($_POST['message']);
+		
+			$insertmbr = $bdd->prepare("INSERT INTO comments(event_id,name, message, date) VALUES(?, ?, ?, NOW())");
+			$insertmbr->execute(array($_GET['id'],$name,$message));
+			header("Location: $_SERVER[HTTP_REFERER]");  
+		}
+
+		$comments = $bdd->query('SELECT* FROM comments WHERE event_id = "'.$_GET['id'].'" ORDER BY id DESC');
+		$count = $bdd->query('SELECT COUNT(*) FROM comments WHERE event_id = "'.$_GET['id'].'"')->fetchColumn();
 	}
 
 
@@ -67,6 +79,39 @@ session_start();
 							<a href="#">Poster</a>
 						</div>
 					</div>
+					<!-- comment items -->
+					<div class="comments">
+						<h4><?=$count;?> Commentaires</h4>
+						<?php while($comment = $comments->fetch()) { ?>
+							<div class="cmt-item flex-it">
+								<img src="../../publics/images/uploads/user.png" style="width:80px;border-radius:50px" alt="">
+								<div class="author-infor">
+									<div class="flex-it2">
+										<h6><a href="#"><?=$comment['name'];?></a></h6> <span class="time"> - <?=date("d M Y",strtotime($comment['date']))?></span>
+									</div>
+									<p><?=$comment['message'];?></p>
+									<p><a class="rep-btn" href="#comment">+ Commenter</a></p>
+								</div>
+							</div>
+						<?php }?>
+					</div>
+					<div class="comment-form">
+						<h4 id='comment'>Faire un commentaire</h4>
+						<form action="" method="post">
+							<div class="row">
+								<div class="col-md-12">
+									<input type="text" name="name" placeholder="Nom complet">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<textarea name="message" id="" placeholder="Message"></textarea>
+								</div>
+							</div>
+							<input class="submit" name="comment" type="submit" value="Envoyer">
+						</form>
+					</div>
+					<!-- comment form -->
 				</div>
 			</div>
 		</div>

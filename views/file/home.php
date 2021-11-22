@@ -16,6 +16,7 @@ require '../../database/db.php';
         $movies = $bdd->query('SELECT * FROM movies WHERE CONCAT(name) LIKE "%'.$search.'%" AND kind="'.$filter.'"  ORDER BY id DESC');
         $found = $bdd->query('SELECT COUNT(*) FROM movies WHERE CONCAT(name) LIKE "%'.$search.'%" AND kind="'.$filter.'" ORDER BY id DESC')->fetchColumn();
     }
+    $news = $bdd->query('SELECT* FROM movies WHERE new=1 ORDER BY id DESC');
     $exist = $movies->rowCount();
     
 ?>
@@ -115,9 +116,47 @@ require '../../database/db.php';
             </div>
         </div>
     </div>
+   
     <div class="page-single">
         <div class="container">
             <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="title-hd">
+                        <h2>Nouveauté</h2>
+                    </div>
+                    <div>
+                        <div class="tab-content">
+                            <div id="tab1-h2" class="tab active">             
+                                <?php if($exist != 0) { ?>
+                                    <div class="flex-wrap-movielist mv-grid-fw">
+                                        <?php while($new = $news->fetch()) {?>
+                                            <div class="movie-item-style-2 movie-item-style-1">
+                                                <img src="image/<?=$new['image'];?>" alt="" style="width:200px;height:250px">
+                                                <div class="hvr-inner">
+                                                    <a href="detail.php?id=<?=$new['id'];?>">Voir plus <i class="ion-android-arrow-dropright"></i> </a>
+                                                </div>
+                                                <div class="mv-item-infor">
+                                                    <div class="cate" style="font-size:0.7em">
+                                                        <span class="orange"><a href="#"><?=$new['kind'];?></a></span>
+                                                        <?php if($new['new']) { ?>
+                                                            <span class="blue"><a href="#">NEW</a></span>
+                                                        <?php } ?>
+                                                    </div>
+                                                    <h6><a href="#"><?=$new['name'];?></a></h6>
+                                                </div>
+                                            </div>
+                                        <?php }?>	
+                                    </div>	
+                                    
+                                    	
+                                <?php } else{ ?>
+                                    <h2	style="color: white; text-align:center">Aucun film trouvé</h2>
+                                <?php } ?>	
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">  
                     <form action="" method="get">
                         <div class="topbar-filter fw">
@@ -141,7 +180,13 @@ require '../../database/db.php';
                     </form>
                     <?php if($exist != 0) { ?>
                         <div class="flex-wrap-movielist mv-grid-fw">
-                            <?php while($movie = $movies->fetch()) { ?>
+                            <?php while($movie = $movies->fetch()) {
+                                $date=$movie['date'];
+                                if($movie['new'] && date('Y-m-d')>date('Y-m-d',strtotime("$date,1 week"))){
+                                    $insertmovie = $bdd->prepare("UPDATE movies SET new = ? WHERE id = ?");
+                                    $insertmovie->execute(array(false, $movie['id']));
+                                }
+                                ?>
                                 <div class="movie-item-style-2 movie-item-style-1">
                                     <img src="image/<?=$movie['image'];?>" alt="" style="width:200px;height:250px">
                                     <div class="hvr-inner">

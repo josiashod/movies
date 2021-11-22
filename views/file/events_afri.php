@@ -42,7 +42,9 @@
 					</div>
 				<?php } else{ ?>
 					<h2	style="color: white; text-align:center">Aucun Evènement</h2>
-				<?php } ?>	
+				<?php } ?>
+				
+				
 			</div>
 		
 		</div>

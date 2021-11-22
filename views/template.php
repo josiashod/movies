@@ -229,6 +229,7 @@
     </div>
     <!--end of rate form popup-->
 
+
     <!--rate form popup-->
     <div class="login-wrapper" id="room-content">
         <div class="login-content">
