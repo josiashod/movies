@@ -19,8 +19,40 @@ if(isset($_POST['events'])){
 				$image=$_FILES['image']['name'];
 		  }
 	}
-	$insertevents = $bdd->prepare("INSERT INTO events(title, type, content, image) VALUES(?, ?, ?, ?)");
+	$insertevents = $bdd->prepare("INSERT INTO events(title, type, content, image, date) VALUES(?, ?, ?, ?,NOW())");
 	$insertevents->execute(array($title,$type,$content,$image));
+
+	//envoyerr mail
+	$last = $bdd->query('SELECT * FROM events ORDER BY id DESC LIMIT 0,1')->fetch();
+	$req_news = $bdd->query("SELECT* FROM newsletters");
+	$news_exist = $req_news->rowCount();
+	if($news_exist!=0){
+		while($new = $req_news->fetch()){
+			$header="MIME-Version: 1.0\r\n";
+			$header.='From:"Ciné World"<shrisbys@gmail.com>'."\n";
+			$header.='Content-Type:text/html; charset="utf-8"'."\n";
+			$header.='Content-Transfer-Encoding: 8bit';
+			$message = '
+			<html>
+			<head>
+			<title>ACtivation du compte</title>
+			<meta charset="utf-8" />
+			</head>
+				<body >
+				<dir style="text-align: center">
+				<h1 align="center">'.$title.'</h1> 
+				<h3 ><b>Actualités sur <i style="color: #343a40">Ciné</i><i style="color: red"> World</i>.</b></h3>
+				<p>Cliquer sur ce lien pour plus d\'information: <a href="http://moviesprogramm.great-site.net/views/file/detail_events.php?id='.$last['id'].'">Rejoingnez nous</a></p>
+				<p>Nous espérons que <i style="color: #343a40">Ciné</i><i style="color: red"> World</i> comblera vos attente.</p>
+				<p>Merci de bien ne pas répondre à ce message.</p>
+				</dir>
+				</body>
+			</html>
+			';
+			
+			mail($new['email'], "Nouvelle Actualité", $message, $header);
+		}
+	}
 
 	$img = $bdd->query('SELECT COUNT(*) FROM events');
 	$imgid = $img->fetchColumn();
@@ -75,7 +107,7 @@ if(isset($_POST['events'])){
 						<div class="row">
 							<div class="col-md-12 form-it">
 								<label>Titre Evènement</label>
-								<input type="text" placeholder="Nom fu film" name="title" required>
+								<input type="text" placeholder="Titre Evènement" name="title" required>
 							</div>
 							<div class="col-md-12 form-it">
 								<label>Type d'évènement</label>

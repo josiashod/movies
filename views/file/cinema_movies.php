@@ -24,6 +24,38 @@
 		if($exist == 0){
 			$insertmbr = $bdd->prepare("INSERT INTO program(movie, date, time, room, rate,week) VALUES(?, ?, ?, ?, ?,?)");
 			$insertmbr->execute(array($movie,$date,$time,$room,$rate,$week));
+
+			//envoyerr mail
+			$last = $bdd->query('SELECT * FROM program ORDER BY id DESC LIMIT 0,1')->fetch();
+			$mov = $bdd->query('SELECT * FROM movies WHERE id="'.$last['movie'].'" ORDER BY id DESC LIMIT 0,1')->fetch();
+			$req_news = $bdd->query("SELECT* FROM newsletters");
+			$news_exist = $req_news->rowCount();
+			if($news_exist!=0){
+				while($new = $req_news->fetch()){
+					$header="MIME-Version: 1.0\r\n";
+					$header.='From:"Ciné World"<shrisbys@gmail.com>'."\n";
+					$header.='Content-Type:text/html; charset="utf-8"'."\n";
+					$header.='Content-Transfer-Encoding: 8bit';
+					$message = '
+					<html>
+					<head>
+					<title>ACtivation du compte</title>
+					<meta charset="utf-8" />
+					</head>
+						<body >
+						<dir style="text-align: center">
+						<h1 align="center">Film : '.$mov['name'].'</h1> 
+						<h3 ><b>programmé le '.date("d M Y",strtotime($last['date'])).' à '.$last['time'].' sur <i style="color: #343a40">Ciné</i><i style="color: red"> World</i>.</b></h3>
+						<p>Cliquer sur ce lien pour plus d\'information: <a href="http://moviesprogramm.great-site.net/views/file/after.php">Rejoingnez nous</a></p>
+						<p>Nous espérons que <i style="color: #343a40">Ciné</i><i style="color: red"> World</i> comblera vos attente.</p>
+						<p>Merci de bien ne pas répondre à ce message.</p>
+						</dir>
+						</body>
+					</html>';
+					mail($new['email'], "Nouvelle Actualité", $message, $header);
+				}
+			}
+
 			header('Location: after.php'); 
 		}else
 			$erreur="Ce film est déjà programmer au même horaire";

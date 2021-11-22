@@ -30,7 +30,7 @@
 						<?php while($event = $events->fetch()) { ?>
 							<div class="col-md-4 col-sm-12 col-xs-12">
 								<div class="blog-item-style-2">
-									<a href="detail_events.php?id=<?=$event['id'];?>"><img src="image/<?=$event['image'];?>" alt=""></a>
+									<a href="detail_events.php?id=<?=$event['id'];?>"><img src="image/<?=$event['image'];?>" style="width:300px;height:150px" alt=""></a>
 									<div class="blog-it-infor">
 										<h3><a href="detail_events.php?id=<?=$event['id'];?>"><?=$event['title'];?></a></h3>
 										<span class="time"><?=date("d M Y",strtotime($event['date']))?></span>

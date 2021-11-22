@@ -53,7 +53,7 @@ session_start();
 				<div class="blog-detail-ct">
 					<h1><?=$event['title'];?></h1>
 					<h4 class="sb-title" style="color:red"><?=date("d M Y",strtotime($event['date']))?></h4>
-					<img src="image/<?=$event['image'];?>" alt="">
+					<img src="image/<?=$event['image'];?>" style="width:100%;height:450px" alt="">
 					<p style="text-align:justify">
 					 	<?=$event['content'];?>
 					</p>

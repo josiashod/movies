@@ -1,3 +1,13 @@
+<?php
+	//newsletter
+	if(isset($_POST['news'])){ 
+		$email = htmlspecialchars($_POST['email']);
+
+		$insertmbr = $bdd->prepare("INSERT INTO newsletters(email) VALUES(?)");
+		$insertmbr->execute(array($email));
+		header("Location: $_SERVER[HTTP_REFERER]");  
+	}
+?>
 <footer class="ht-footer">
 	<div class="container">
 		<div class="flex-parent-ft">
@@ -37,11 +47,11 @@
 			</div>
 			<div class="flex-child-ft item5">
 				<h4>Newsletter</h4>
-				<p>Subscribe to our newsletter system now <br> to get latest news from us.</p>
-				<form action="#">
-					<input type="text" placeholder="Enter your email...">
+				<p>Souscrire à la newsletter et <br>obtient les derniers informations.</p>
+				<form action="" method="post">
+					<input type="text" name="email" placeholder="Entrer email..." required>	
+					<button  type="submit" class="btn" name="news" >Souscrire</button>
 				</form>
-				<a href="#" class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a>
 			</div>
 		</div>
 	</div>

@@ -23,6 +23,35 @@
 			header("Location: $_SERVER[HTTP_REFERER]"); 
 		}
 
+		//Partager
+		if(isset($_POST['share'])){ 
+			$email = htmlspecialchars($_POST['email']);
+			$header="MIME-Version: 1.0\r\n";
+			$header.='From:"Ciné World"<shrisbys@gmail.com>'."\n";
+			$header.='Content-Type:text/html; charset="utf-8"'."\n";
+			$header.='Content-Transfer-Encoding: 8bit';
+			$message = '
+			<html>
+			<head>
+			<title>ACtivation du compte</title>
+			<meta charset="utf-8" />
+			</head>
+				<body >
+				<dir style="text-align: center">
+				<h1 align="center">Film : '.$movie['name'].'</h1> 
+				<h3 ><b>Disponible sur <i style="color: #343a40">Ciné</i><i style="color: red"> World</i>.</b></h3>
+				<p>Cliquer sur ce lien pour plus d\'information: <a href="http://moviesprogramm.great-site.net/views/file/detail.php?id='.$_GET['id'].'">Rejoingnez nous</a></p>
+				<p>Nous espérons que <i style="color: #343a40">Ciné</i><i style="color: red"> World</i> comblera vos attente.</p>
+				<p>Merci de bien ne pas répondre à ce message.</p>
+				</dir>
+				</body>
+			</html>
+			';	
+			mail($email, "Nouvelle affiche", $message, $header);
+
+			header("Location: $_SERVER[HTTP_REFERER]");  
+		}
+
 		$opinions = $bdd->query('SELECT* FROM opinions WHERE movie_id = "'.$_GET['id'].'" ORDER BY id DESC');
 		$count = $bdd->query('SELECT COUNT(*) FROM opinions WHERE movie_id = "'.$_GET['id'].'"')->fetchColumn();
     }
@@ -68,14 +97,10 @@
 				<div class="movie-single-ct main-content">
 					<h1 class="bd-hd"><?=$movie['name'];?> <span> <?=date("Y",strtotime($movie['date']));?></span></h1>
 					<div class="social-btn">
-						<a href="#" class="parent-btn"><i class="ion-heart"></i>Ajouter au favoris</a>
 						<div class="hover-bnt">
 							<a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>Partager</a>
 							<div class="hvr-item">
-								<a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
-								<a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
-								<a href="#" class="hvr-grow"><i class="ion-social-googleplus"></i></a>
-								<a href="#" class="hvr-grow"><i class="ion-social-youtube"></i></a>
+								<a href="#" class="hvr-grow roomsLink"><i class="ion-social-googleplus"></i></a>
 							</div>
 						</div>		
 					</div>
@@ -210,6 +235,26 @@
 		</div>
 	</div>
 </div>
+
+<!--Partager-->
+<div class="login-wrapper" id="room-contentup">
+	<div class="login-content">
+		<a href="#" class="close">x</a>
+		<h3>Partager</h3>
+		<form method="post" action="">
+			<div class="row">
+				<label for="">
+					Email
+					<input type="email" name="email" id="" placeholder="cine@exemple.com" required="required" style="text-transform: none;"/>
+				</label>
+			</div>
+		<div class="row">
+			<button type="submit" name="share"><i class="ion-android-share-alt"></i> Partarger</button>
+		</div>
+		</form>
+	</div>
+</div>
+<!--Partager-->
 <style>
 .dis-none{
 	display: none;

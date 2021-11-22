@@ -28,6 +28,38 @@ if(isset($_POST['movies'])){
 
 	$insertmovies = $bdd->prepare("INSERT INTO movies(name, kind, new, date, time, resume, image) VALUES(?, ?, ?, ?, ?, ?, ?)");
 	$insertmovies->execute(array($name,$kind,$new,$date,$time,$resume,$image));
+	
+	//envoyerr mail
+	$last = $bdd->query('SELECT * FROM movies ORDER BY id DESC LIMIT 0,1')->fetch();
+	$req_news = $bdd->query("SELECT* FROM newsletters");
+	$news_exist = $req_news->rowCount();
+	if($news_exist!=0){
+		while($new = $req_news->fetch()){
+			$header="MIME-Version: 1.0\r\n";
+			$header.='From:"Ciné World"<shrisbys@gmail.com>'."\n";
+			$header.='Content-Type:text/html; charset="utf-8"'."\n";
+			$header.='Content-Transfer-Encoding: 8bit';
+			$message = '
+			<html>
+			<head>
+			<title>ACtivation du compte</title>
+			<meta charset="utf-8" />
+			</head>
+				<body >
+				<dir style="text-align: center">
+				<h1 align="center">Film : '.$last['name'].'</h1> 
+				<h3 ><b>Disponible sur <i style="color: #343a40">Ciné</i><i style="color: red"> World</i>.</b></h3>
+				<p>Cliquer sur ce lien pour plus d\'information: <a href="http://moviesprogramm.great-site.net/views/file/detail.php?id='.$last['id'].'">Rejoingnez nous</a></p>
+				<p>Nous espérons que <i style="color: #343a40">Ciné</i><i style="color: red"> World</i> comblera vos attente.</p>
+				<p>Merci de bien ne pas répondre à ce message.</p>
+				</dir>
+				</body>
+			</html>
+			';
+			
+			mail($new['email'], "Nouvelle Actualité", $message, $header);
+		}
+	}
 
 	$img = $bdd->query('SELECT COUNT(*) FROM movies');
 	$imgid = $img->fetchColumn();
