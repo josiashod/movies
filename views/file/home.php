@@ -40,10 +40,9 @@ require '../../database/db.php';
                                     <h1><a href="#">guardians of the<br>
                                     galaxy <span>2015</span></a></h1>
                                     <div class="social-btn">
-                                        <a href="#" class="parent-btn"><i class="ion-play"></i> Watch Trailer</a>
-                                        <a href="#" class="parent-btn"><i class="ion-heart"></i> Add to Favorite</a>
+                                        <a href="#" class="parent-btn"><i class="ion-play"></i> Bande d'annonce</a>
                                         <div class="hover-bnt">
-                                            <a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>share</a>
+                                            <a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>Partager</a>
                                             <div class="hvr-item">
                                                 <a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
                                                 <a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
@@ -55,9 +54,9 @@ require '../../database/db.php';
                                     <div class="mv-details">
                                         <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
                                         <ul class="mv-infor">
-                                            <li>  Run Time: 2h21’ </li>
+                                            <li>  Durée: 2h21’ </li>
                                             <li>  Rated: PG-13  </li>
-                                            <li>  Release: 1 May 2015</li>
+                                            <li>  Date de sortie: 1 Mai 2015</li>
                                         </ul>
                                     </div>		
                                 </div>

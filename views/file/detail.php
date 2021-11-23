@@ -23,7 +23,7 @@
 			header("Location: $_SERVER[HTTP_REFERER]"); 
 		}
 
-		//Partager
+		//Partager Email
 		if(isset($_POST['share'])){ 
 			$email = htmlspecialchars($_POST['email']);
 			$header="MIME-Version: 1.0\r\n";
@@ -49,6 +49,32 @@
 			';	
 			mail($email, "Nouvelle affiche", $message, $header);
 
+			header("Location: $_SERVER[HTTP_REFERER]");  
+		}
+
+		//Partager WhatApps
+		if(isset($_POST['whatsapp'])){ 
+			$tel = htmlspecialchars($_POST['tel']);
+			$message = $movie['name'].' actuellement disponible sur CINE-WORLD. Rejoingnez-nous sur http://moviesprogramm.great-site.net/views/file/detail.php?id='.$_GET['id'];
+			$data = [
+				'phone' => $tel, // Receivers phone
+				'body' => $message , // Message
+			];
+			$json = json_encode($data); // Encode data to JSON
+			// URL for request POST /message
+			$token = 'rco246wk8f6w46sf';
+			$instanceId = '371110';
+			$url = 'https://api.chat-api.com/instance'.$instanceId.'/message?token='.$token;
+			// Make a POST request
+			$options = stream_context_create(['http' => [
+					'method'  => 'POST',
+					'header'  => 'Content-type: application/json',
+					'content' => $json
+				]
+			]);
+			// Send a request
+			$result = file_get_contents($url, false, $options);
+			//print_r($result);
 			header("Location: $_SERVER[HTTP_REFERER]");  
 		}
 
@@ -101,6 +127,7 @@
 							<a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>Partager</a>
 							<div class="hvr-item">
 								<a href="#" class="hvr-grow roomsLink"><i class="ion-social-googleplus"></i></a>
+								<a href="#" class="hvr-grow ratesLink"><i class="ion-social-whatsapp"></i></a>
 							</div>
 						</div>		
 					</div>
@@ -203,7 +230,7 @@
 											<form action="" method="post">
 												<div class="row">
 													<div class="col-md-6">
-														<input type="text" name="name" placeholder="Nom complet">
+														<input type="text" name="name" placeholder="Nom complet" required="required">
 													</div>
 													<div class="col-md-6">
 													<span class="wrap-rating cl11 pointer">
@@ -212,13 +239,13 @@
 														<i class="item-rating pointer fa fa-star-o"></i>
 														<i class="item-rating pointer fa fa-star-o"></i>
 														<i class="item-rating pointer fa fa-star-o"></i>
-														<input class="dis-none" type="hidden" name="rating" required>
+														<input class="dis-none" type="number" name="rating" required="required" min="1">
 													</span>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-12">
-														<textarea name="content" id="" placeholder="Votre avis"></textarea>
+														<textarea name="content" id="" placeholder="Votre avis" required="required"></textarea>
 													</div>
 												</div>
 												<input class="submit" name="opinion" type="submit" value="Envoyer">
@@ -254,10 +281,29 @@
 		</form>
 	</div>
 </div>
+
+<div class="login-wrapper" id="rate-contentup">
+	<div class="login-content">
+		<a href="#" class="close">x</a>
+		<h3>Telephone</h3>
+		<form method="post" action="">
+			<div class="row">
+				<label for="">
+					Telephone
+					<input type="tel" name="tel" id="" placeholder="+22962132758" required="required" style="text-transform: none;"/>
+				</label>
+			</div>
+		<div class="row">
+			<button type="submit" name="whatsapp"><i class="ion-android-share-alt"></i> Partarger</button>
+		</div>
+		</form>
+	</div>
+</div>
 <!--Partager-->
 <style>
 .dis-none{
 	display: none;
+	visibility: hidden;
 }
 
 .pointer {
