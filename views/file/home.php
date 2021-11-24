@@ -6,7 +6,7 @@ require '../../database/db.php';
     $movies = $bdd->query('SELECT* FROM movies ORDER BY id DESC');
     //Nombre total de films
     $all = $bdd->query('SELECT COUNT(*) FROM movies')->fetchColumn();
-
+    
     //Traitement des données pour le filtre
     if(isset($_GET['filter']) || isset($_GET['search'])) {
         $filter = htmlspecialchars($_GET['filter']);
@@ -77,13 +77,11 @@ require '../../database/db.php';
                                         <span class="yell"><a href="#">Action</a></span>
                                         <span class="orange"><a href="#">advanture</a></span>
                                     </div>
-                                    <h1><a href="#">guardians of the<br>
-                                    galaxy <span>2015</span></a></h1>
+                                    <h1><a href="#">broolyn<span>2017</span></a></h1>
                                     <div class="social-btn">
-                                        <a href="#" class="parent-btn"><i class="ion-play"></i> Watch Trailer</a>
-                                        <a href="#" class="parent-btn"><i class="ion-heart"></i> Add to Favorite</a>
+                                        <a href="#" class="parent-btn"><i class="ion-play"></i> Bande d'annonce</a>
                                         <div class="hover-bnt">
-                                            <a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>share</a>
+                                            <a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>Partager</a>
                                             <div class="hvr-item">
                                                 <a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
                                                 <a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
@@ -95,18 +93,16 @@ require '../../database/db.php';
                                     <div class="mv-details">
                                         <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
                                         <ul class="mv-infor">
-                                            <li>  Run Time: 2h21’ </li>
+                                            <li>  Durée: 1h30’ </li>
                                             <li>  Rated: PG-13  </li>
-                                            <li>  Release: 1 May 2015</li>
+                                            <li>  Date de sortie: 29 Juin 2015</li>
                                         </ul>
-                                    </div>
-                                   
-                                    
+                                    </div>		
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12">
                                 <div class="mv-img-2">
-                                    <a href="#"><img src="../../publics/images/uploads/poster1.jpg" alt=""></a>
+                                    <a href="#"><img src="../../publics/images/uploads/series-img.jpg" alt="" style="width:75%"></a>
                                 </div>
                             </div>
                         </div>	
@@ -161,17 +157,17 @@ require '../../database/db.php';
                         <div class="topbar-filter fw">
                             <p>Trouvé <span><?=number_format($found);?> films </span>sur <?=number_format($all);?> aux totals</p>
                                 <label>Trier par:</label>
-                                <select name="filter">
-                                    <option value="">Tous</option>
-									<option value="divertissement">Divertissement</option>
-									<option value="action">Action</option>
-									<option value="suspens">Suspens</option>
-									<option value="policier">Policier</option>
-									<option value="fantastique">Fantastique</option>
-									<option value="sci_fi">Science-fiction</option>
-									<option value="drame">Drame</option>
-									<option value="comedie">Comédie</option>
-									<option value="enfant">Enfant</option>
+                                <select name="filter" required>
+                                    <option value="">Tout</option>
+                                    <option <?php if(isset($filter) && $filter =="divertissement"){?> selected <?php }?> value="divertissement">Divertissement</option>
+                                    <option <?php if(isset($filter) && $filter =="action"){?> selected <?php }?> value="action">Action</option>
+                                    <option <?php if(isset($filter) && $filter =="suspens"){?> selected <?php }?> value="suspens">Suspens</option>
+                                    <option <?php if(isset($filter) && $filter =="policier"){?> selected <?php }?> value="policier">Policier</option>
+                                    <option <?php if(isset($filter) && $filter =="fantastique"){?> selected <?php }?> value="fantastique">Fantastique</option>
+                                    <option <?php if(isset($filter) && $filter =="sci_fi"){?> selected <?php }?> value="sci_fi">Science-fiction</option>
+                                    <option <?php if(isset($filter) && $filter =="drame"){?> selected <?php }?> value="drame">Drame</option>
+                                    <option <?php if(isset($filter) && $filter =="comedie"){?> selected <?php }?> value="comedie">Comédie</option>
+                                    <option <?php if(isset($filter) && $filter =="enfant"){?> selected <?php }?> value="enfant">Enfant</option>
                                 </select>
                                 <input type="hidden" value=" " name="search">
                                 <button type="submit" class="list" ><i class="ion-ios-search "></i></button>
@@ -181,7 +177,7 @@ require '../../database/db.php';
                         <div class="flex-wrap-movielist mv-grid-fw">
                             <?php while($movie = $movies->fetch()) {
                                 $date=$movie['date'];
-                                if($movie['new'] && date('Y-m-d')>date('Y-m-d',strtotime("$date,1 week"))){
+                                if($movie['new'] && date('Y-m-d')>date('Y-m-d',strtotime("$date,1 month"))){
                                     $insertmovie = $bdd->prepare("UPDATE movies SET new = ? WHERE id = ?");
                                     $insertmovie->execute(array(false, $movie['id']));
                                 }

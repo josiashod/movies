@@ -99,11 +99,11 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>Date de sortie</label>
+								<label>Date de programmation</label>
 								<input type="date" placeholder="" name="date" required>
 							</div>
 							<div class="col-md-6 form-it">
-								<label>Durée</label>
+								<label>Heure de programation</label>
 								<input type="time" placeholder="" name="time" required>
 							</div>
 						</div>

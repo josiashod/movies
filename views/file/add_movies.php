@@ -158,7 +158,7 @@ if(isset($_POST['movies'])){
 							</div>
 							<div class="col-md-4 form-it">
 								<label>Durée</label>
-								<input type="time" placeholder="" name="time" required>
+								<input type="time" placeholder="" name="time"  required>
 							</div>
 							<div class="col-md-4 form-it">
 								<label>Image principale</label>

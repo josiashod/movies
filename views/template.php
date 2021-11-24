@@ -67,7 +67,7 @@
         $insertmbr->execute(array($name,$place));
         header("Location: $_SERVER[HTTP_REFERER]");  
     }
-
+    
     //Filtre de la barre de recherche
     if(isset($_POST['filter'])) {
         $filter = htmlspecialchars($_POST['filter']);
@@ -104,7 +104,7 @@
 <body>
     <!--preloading-->
     <div id="preloader">
-        <img class="logo" src="../../publics/images/logo1.png" alt="" width="119" height="58">
+        <img class="logo" src="../../publics/images/cine.png" alt="" width="200" height="58">
         <div id="status">
             <span></span>
             <span></span>
@@ -148,14 +148,6 @@
                         Mot de passe:
                         <input type="password" name="password" id="password" placeholder="******"  required="required" style="text-transform: none;"/>
                     </label>
-                </div>
-                <div class="row">
-                    <div class="remember">
-                        <div>
-                            <input type="checkbox" name="remember" value="Remember me" required><span>Remember me</span>
-                        </div>
-                        <a href="#">Forget password ?</a>
-                    </div>
                 </div>
             <div class="row">
                 <button type="submit" name="check">Se connecter</button>
@@ -264,17 +256,17 @@
 			<div class="top-search">
 				<select name="filter" required>
 					<option value="">Tout</option>
-					<option value="divertissement">Divertissement</option>
-					<option value="action">Action</option>
-					<option value="suspens">Suspens</option>
-					<option value="policier">Policier</option>
-					<option value="fantastique">Fantastique</option>
-					<option value="sci_fi">Science-fiction</option>
-					<option value="drame">Drame</option>
-					<option value="comedie">Comédie</option>
-					<option value="enfant">Enfant</option>
+					<option <?php if(isset($filter) && $filter =="divertissement"){?> selected <?php }?> value="divertissement">Divertissement</option>
+					<option <?php if(isset($filter) && $filter =="action"){?> selected <?php }?> value="action">Action</option>
+					<option <?php if(isset($filter) && $filter =="suspens"){?> selected <?php }?> value="suspens">Suspens</option>
+					<option <?php if(isset($filter) && $filter =="policier"){?> selected <?php }?> value="policier">Policier</option>
+					<option <?php if(isset($filter) && $filter =="fantastique"){?> selected <?php }?> value="fantastique">Fantastique</option>
+					<option <?php if(isset($filter) && $filter =="sci_fi"){?> selected <?php }?> value="sci_fi">Science-fiction</option>
+					<option <?php if(isset($filter) && $filter =="drame"){?> selected <?php }?> value="drame">Drame</option>
+					<option <?php if(isset($filter) && $filter =="comedie"){?> selected <?php }?> value="comedie">Comédie</option>
+					<option <?php if(isset($filter) && $filter =="enfant"){?> selected <?php }?> value="enfant">Enfant</option>
 				</select>
-				<input type="text" placeholder="Rechercher un film" name="search">
+				<input type="text" placeholder="Rechercher un film" name="search" value="<?php if(isset($search)){echo $search ;}?>">
 			</div>
 		</form>
 	</div>

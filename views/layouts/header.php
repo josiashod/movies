@@ -10,7 +10,7 @@
 					<span></span>
 				</div>
 			</div>
-			<a href="index-2.html"><img class="logo" src="../../publics/images/logo1.png" alt="" width="119" height="58"></a>
+			<a href="home.php"><img class="logo" src="../../publics/images/cine.png" alt="" width="200" ></a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
@@ -25,7 +25,7 @@
 				</li>
 				<li class="">
 					<a class="btn btn-default dropdown-toggle lv1" href="after.php">
-					Pochainement
+					Prochainement
 					</a>
 				</li>
 				<li class="dropdown first">
