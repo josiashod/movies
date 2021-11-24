@@ -2,13 +2,15 @@
 session_start();
 	require '../../database/db.php';
     //Afficher les films de la semaine prochaine
-    $programs0 = $bdd->query('SELECT* FROM program WHERE week="'.date("Y-m-W", strtotime("1 week")).'" ORDER BY id DESC'); 
+    $programs0 = $bdd->query('SELECT* FROM program WHERE week>"'.date("Y-m-W").'" AND week<="'.date("Y-m-W", strtotime("1 week")).'" ORDER BY id DESC'); 
     $exist0 = $programs0->rowCount();
+    //var_dump(date("Y-m-W", strtotime("$da")));
+    //die();
     //Afficher les films de la semaine actuelle
     $programs = $bdd->query('SELECT* FROM program WHERE week="'.date('Y-m-W').'" ORDER BY id DESC');
     $exist1 = $programs->rowCount();
     //Afficher les films de la semaine passée
-    $programs2 = $bdd->query('SELECT* FROM program WHERE week="'.date("Y-m-W", strtotime("-1 week")).'" ORDER BY id DESC'); 
+    $programs2 = $bdd->query('SELECT* FROM program WHERE week<"'.date("Y-m-W").'" AND week>="'.date("Y-m-W", strtotime("-1 week")).'" ORDER BY id DESC'); 
     $exist2 = $programs2->rowCount();
 ?>
 
