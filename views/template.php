@@ -31,7 +31,8 @@
     //CONNEXION
     if(isset($_POST['check'])){ 
         $email = htmlspecialchars($_POST['email']);
-        $password = sha1($_POST['password']);
+        // $password = sha1($_POST['password']);
+        $password = $_POST['password'];
         if(!empty($_POST['email']) AND !empty($_POST['email'])){
             $requser = $bdd->prepare('SELECT* FROM user WHERE email = ? AND password = ?');
             $requser->execute(array($email, $password));

@@ -3,11 +3,11 @@
 	require '../../database/db.php';
 	if(!$_SESSION['statut'])header("Location: home.php");
 	//movies
-    $mov = $bdd->query('SELECT* FROM movies ORDER BY id DESC');
+    $mov = $bdd->query('SELECT * FROM movies ORDER BY id DESC');
 	//room
-    $roo = $bdd->query('SELECT* FROM rooms ORDER BY id DESC');
+    $roo = $bdd->query('SELECT * FROM rooms ORDER BY id DESC');
 	//rate
-    $rat = $bdd->query('SELECT* FROM rates ORDER BY id DESC');
+    $rat = $bdd->query('SELECT * FROM rates ORDER BY id DESC');
 
 	//SALLE
     if(isset($_POST['program'])){ 
