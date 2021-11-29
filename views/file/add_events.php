@@ -54,9 +54,8 @@ if(isset($_POST['events'])){
 		}
 	}
 
-	$img = $bdd->query('SELECT COUNT(*) FROM events');
-	$imgid = $img->fetchColumn();
-
+    $img = $bdd->query('SELECT * FROM events ORDER BY id DESC LIMIT 0,1')->fetch();
+    $imgid = $img['id'];
 
 	$countfiles = count($_FILES['images']['name']);
 
@@ -72,6 +71,8 @@ if(isset($_POST['events'])){
 				$images=$_FILES['images']['name'][$i];
 				$type_id=$imgid;
 				$type="event";
+                //var_dump($type_id);
+                //die();
 				$insertimg = $bdd->prepare("INSERT INTO images(link, type_id, type) VALUES(?, ?, ?)");
 				$insertimg->execute(array($images,$type_id,$type));
 			}

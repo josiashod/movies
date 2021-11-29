@@ -11,7 +11,7 @@ if(isset($_SESSION['id'])){
 }
 ?>
 
-<?php $title = 'Gestion des films'; ?>
+<?php $title = 'Dashboard'; ?>
 
 <?php ob_start(); ?>
 <div class="hero user-hero">
@@ -19,29 +19,24 @@ if(isset($_SESSION['id'])){
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1>Gestion des films</h1>
+					<h1>Dashboard</h1>
 				</div>
 			</div>
 		</div><br>
         <div class="row">
-			<a class="col-md-3 sub" href="rate.php">
+			<a class="col-md-4 sub" href="movies.php">
 				<div class="">
-					<h3>Tarif</h3>
+					<h3>Gestion des films</h3>
 				</div>
             </a>
-            <a class="col-md-3 sub" href="room.php">
+            <a class="col-md-4 sub" href="members.php">
 				<div class="">
-					<h3>Salle</h3>
+					<h3>Gestion des membres</h3>
 				</div>
             </a>
-            <a class="col-md-3 sub" href="add_movies.php">
+            <a class="col-md-4 sub" href="add_events.php">
 				<div class="">
-					<h3>Ajouter un film</h3>
-				</div>
-            </a>
-            <a class="col-md-3 sub" href="cinema_movies.php">
-				<div class="">
-					<h3>Programmer un film</h3>
+					<h3>Ajouter Evènement</h3>
 				</div>
             </a>
 		</div>

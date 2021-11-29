@@ -61,8 +61,8 @@ if(isset($_POST['movies'])){
 		}
 	}
 
-	$img = $bdd->query('SELECT COUNT(*) FROM movies');
-	$imgid = $img->fetchColumn();
+	$img = $bdd->query('SELECT * FROM events ORDER BY id DESC LIMIT 0,1')->fetch();
+    $imgid = $img['id'];
 
 
 	$countfiles = count($_FILES['images']['name']);

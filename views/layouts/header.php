@@ -19,12 +19,12 @@
 					<a href="#page-top"></a>
 				</li>
 				<li class="">
-					<a class="btn btn-default dropdown-toggle lv1" href="home.php">
+					<a class="btn btn-default lv1" href="home.php">
 					A l'Affiche
 					</a>
 				</li>
 				<li class="">
-					<a class="btn btn-default dropdown-toggle lv1" href="after.php">
+					<a class="btn btn-default lv1" href="after.php">
 					Prochainement
 					</a>
 				</li>
@@ -48,15 +48,10 @@
 					</ul>
 				</li>
 				<?php if(isset($conect['id']) && $conect['statut']){ ?>
-					<li class="dropdown first">
-					<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-					Administration<i class="fa fa-angle-down" aria-hidden="true"></i>
+				<li class="">
+					<a class="btn btn-default lv1" href="dashboard.php">
+					Dashboard
 					</a>
-					<ul class="dropdown-menu level1">
-						<li><a href="movies.php">Gestion des films</a></li>
-						<li><a href="members.php">Gestion des membres</a></li>	
-						<li><a href="add_events.php">Ajouter Evènement</a></li>
-					</ul>
 				</li>
 				<?php }?>
 			</ul>

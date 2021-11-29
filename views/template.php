@@ -42,7 +42,7 @@
                 $_SESSION['username'] = $userinfo['username'];
                 $_SESSION['email'] = $userinfo['email'];
                 $_SESSION['statut'] = $userinfo['statut'];
-                header("Location: $_SERVER[HTTP_REFERER]");
+                header("Location: dashboard.php");
             }
             else
                 $erreur="";

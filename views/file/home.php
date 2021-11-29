@@ -18,11 +18,21 @@ require '../../database/db.php';
     }
     $news = $bdd->query('SELECT* FROM movies WHERE new=1 ORDER BY id DESC');
     $exist = $movies->rowCount();
+    $er = $_GET['er'];
+    if($er == "Erreur")
+        $erreur_log = "aa";
     
 ?>
 <?php $title = 'Accueil'; ?>
 
 <?php ob_start(); ?>
+
+<?php if(isset($erreur_log)){?>
+    <div style="border: 1px solid transparant; background:rgba(255, 34, 34, 0.308); font-size: 1.2em; color: red;padding: 1%;text-align: center;  ">
+        Veuillez vous connectez pour avec un accès administrateur pour accéder à l'espace privé.
+    </div>
+<?php }?>
+
 
     <div class="slider sliderv2">
         <div class="container">
@@ -103,6 +113,45 @@ require '../../database/db.php';
                             <div class="col-md-4 col-sm-12 col-xs-12">
                                 <div class="mv-img-2">
                                     <a href="#"><img src="../../publics/images/uploads/series-img.jpg" alt="" style="width:75%"></a>
+                                </div>
+                            </div>
+                        </div>	
+                    </div>
+                    <div class="movie-item">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                <div class="title-in">
+                                    <div class="cate">
+                                        <span class="blue"><a href="#">Sci-fi</a></span>
+                                        <span class="yell"><a href="#">Action</a></span>
+                                        <span class="orange"><a href="#">advanture</a></span>
+                                    </div>
+                                    <h1><a href="#">the king's<br>man<span>2021</span></a></h1>
+                                    <div class="social-btn">
+                                        <a href="#" class="parent-btn"><i class="ion-play"></i> Bande d'annonce</a>
+                                        <div class="hover-bnt">
+                                            <a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>Partager</a>
+                                            <div class="hvr-item">
+                                                <a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
+                                                <a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
+                                                <a href="#" class="hvr-grow"><i class="ion-social-googleplus"></i></a>
+                                                <a href="#" class="hvr-grow"><i class="ion-social-youtube"></i></a>
+                                            </div>
+                                        </div>		
+                                    </div>
+                                    <div class="mv-details">
+                                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                        <ul class="mv-infor">
+                                            <li>  Durée: 02h11 </li>
+                                            <li>  Rated: PG-13  </li>
+                                            <li>  Date de sortie: 21 Décembre 2021</li>
+                                        </ul>
+                                    </div>		
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <div class="mv-img-2">
+                                    <a href="#"><img src="../../publics/images/uploads/Kings-Man.jpg" alt="" style="width:75%"></a>
                                 </div>
                             </div>
                         </div>	

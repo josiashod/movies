@@ -110,7 +110,7 @@ if(isset($_SESSION['id'])){
 							</div>
 							<div class="col-md-6 form-it">
 								<label>Email Address</label>
-								<input type="text" value="<?=$conect['email'];?>" nmae="email" required>
+								<input type="text" value="<?=$conect['email'];?>" name="email" required>
 							</div>
 						</div>
 						<div class="row">
@@ -124,19 +124,19 @@ if(isset($_SESSION['id'])){
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Ancien mot de passe</label>
-								<input type="text" placeholder="**********" name="old" required>
+								<input type="password" placeholder="**********" name="old" required>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Nouveau mot de passe</label>
-								<input type="text" placeholder="***************" name="password" required>
+								<input type="password" placeholder="***************" name="password" required>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Confirmer mot de passe</label>
-								<input type="text" placeholder="*************** " name="confirm" required>
+								<input type="password" placeholder="*************** " name="confirm" required>
 							</div>
 						</div>
 						<div class="row">
